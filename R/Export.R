@@ -445,6 +445,13 @@ exportMainResults <- function(outputFolder,
   results <- enforceMinCellValue(results, "comparatorSubjects", minCellCount)
   results <- enforceMinCellValue(results, "targetOutcomes", minCellCount)
   results <- enforceMinCellValue(results, "comparatorOutcomes", minCellCount)
+  
+  # TODO Add to skeleton for FGR
+  if ("targetCompetingOutcomes" %in% names(results)) {
+    results <- enforceMinCellValue(results, "targetCompetingOutcomes", minCellCount)
+    results <- enforceMinCellValue(results, "comparatorCompetingOutcomes", minCellCount)
+  }
+  
   colnames(results) <- SqlRender::camelCaseToSnakeCase(colnames(results))
   fileName <- file.path(exportFolder, "cohort_method_result.csv")
   readr::write_csv(results, fileName)
