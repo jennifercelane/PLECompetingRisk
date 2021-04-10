@@ -426,7 +426,17 @@ exportMainResults <- function(outputFolder,
   
   
   ParallelLogger::logInfo("- cohort_method_result table")
-  analysesSum <- readr::read_csv(file.path(outputFolder, "analysisSummary.csv"), col_types = readr::cols())
+  
+  # TODO Add to skeleton for FGR
+  spec <- readr::spec_csv(file.path(outputFolder, "analysisSummary.csv"))
+  if (!is.null(spec$cols$targetCompetingOutcomes)) {
+    spec$cols$targetCompetingOutcomes <- readr::col_integer()
+  }
+  if (!is.null(spec$cols$comparatorCompetingOutcomes)) {
+    spec$cols$comparatorCompetingOutcomes <- readr::col_integer()
+  }
+  analysesSum <- readr::read_csv(file.path(outputFolder, "analysisSummary.csv"), col_types = spec$cols)
+  
   allControls <- getAllControls(outputFolder)
   ParallelLogger::logInfo("  Performing empirical calibration on main effects")
   cluster <- ParallelLogger::makeCluster(min(4, maxCores))
@@ -566,52 +576,63 @@ calibrate <- function(subset, allControls) {
     subset$calibratedSeLogRr <- rep(NA, nrow(subset))
   }
   subset$i2 <- rep(NA, nrow(subset))
-  subset <- subset[, c("targetId",
-                       "comparatorId",
-                       "outcomeId",
-                       "analysisId",
-                       "rr",
-                       "ci95lb",
-                       "ci95ub",
-                       "p",
-                       "i2",
-                       "logRr",
-                       "seLogRr",
-                       "target",
-                       "comparator",
-                       "targetDays",
-                       "comparatorDays",
-                       "eventsTarget",
-                       "eventsComparator",
-                       "calibratedP",
-                       "calibratedRr",
-                       "calibratedCi95Lb",
-                       "calibratedCi95Ub",
-                       "calibratedLogRr",
-                       "calibratedSeLogRr")]
-  colnames(subset) <- c("targetId",
-                        "comparatorId",
-                        "outcomeId",
-                        "analysisId",
-                        "rr",
-                        "ci95Lb",
-                        "ci95Ub",
-                        "p",
-                        "i2",
-                        "logRr",
-                        "seLogRr",
-                        "targetSubjects",
-                        "comparatorSubjects",
-                        "targetDays",
-                        "comparatorDays",
-                        "targetOutcomes",
-                        "comparatorOutcomes",
-                        "calibratedP",
-                        "calibratedRr",
-                        "calibratedCi95Lb",
-                        "calibratedCi95Ub",
-                        "calibratedLogRr",
-                        "calibratedSeLogRr")
+  
+  # TODO Add to skeleton for FGR
+  namesBefore <- c("targetId",
+                   "comparatorId",
+                   "outcomeId",
+                   "analysisId",
+                   "rr",
+                   "ci95lb",
+                   "ci95ub",
+                   "p",
+                   "i2",
+                   "logRr",
+                   "seLogRr",
+                   "target",
+                   "comparator",
+                   "targetDays",
+                   "comparatorDays",
+                   "eventsTarget",
+                   "eventsComparator",
+                   "calibratedP",
+                   "calibratedRr",
+                   "calibratedCi95Lb",
+                   "calibratedCi95Ub",
+                   "calibratedLogRr",
+                   "calibratedSeLogRr")
+  
+  namesAfter <- c("targetId",
+                  "comparatorId",
+                  "outcomeId",
+                  "analysisId",
+                  "rr",
+                  "ci95Lb",
+                  "ci95Ub",
+                  "p",
+                  "i2",
+                  "logRr",
+                  "seLogRr",
+                  "targetSubjects",
+                  "comparatorSubjects",
+                  "targetDays",
+                  "comparatorDays",
+                  "targetOutcomes",
+                  "comparatorOutcomes",
+                  "calibratedP",
+                  "calibratedRr",
+                  "calibratedCi95Lb",
+                  "calibratedCi95Ub",
+                  "calibratedLogRr",
+                  "calibratedSeLogRr")
+  
+  if ("targetCompetingOutcomes" %in% colnames(subset)) {
+    namesBefore <- c(namesBefore, "targetCompetingOutcomes", "comparatorCompetingOutcomes")
+    namesAfter <- c(namesAfter, "targetCompetingOutcomes", "comparatorCompetingOutcomes")
+  }
+  
+  subset <- subset[, namesBefore]
+  colnames(subset) <- namesAfter
   return(subset)
 }
 
