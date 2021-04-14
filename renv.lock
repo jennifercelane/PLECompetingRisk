@@ -27,14 +27,14 @@
       "Package": "CohortMethod",
       "Version": "4.0.1",
       "Source": "GitHub",
-      "RemoteType": "github",
       "Remotes": "ohdsi/FeatureExtraction, ohdsi/Eunomia",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "CohortMethod",
       "RemoteUsername": "OHDSI",
       "RemoteRef": "fine_gray",
-      "RemoteSha": "37f64827baf0fbc25cd547fe47e2cc5f8ec996b7",
-      "Hash": "4203d487fda56324b9d7fab79dca055e"
+      "RemoteSha": "22866594ebe265d114c51deef6d0a0fb62a6af80",
+      "Hash": "eb3ed521f841c6cfbaa5a7a0d17ff29a"
     },
     "Cyclops": {
       "Package": "Cyclops",
@@ -54,6 +54,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "4744be45519d675af66c28478720fce5"
+    },
+    "DT": {
+      "Package": "DT",
+      "Version": "0.17",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "56b33b77f4cffd78ff96b8e5a69eabb0"
     },
     "DatabaseConnector": {
       "Package": "DatabaseConnector",
@@ -285,6 +292,13 @@
       "Repository": "CRAN",
       "Hash": "0d57bc8e27b7ba9e45dba825ebc0de6b"
     },
+    "crosstalk": {
+      "Package": "crosstalk",
+      "Version": "1.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2b06f9e415a62b6762e4b8098d2aecbc"
+    },
     "dbplyr": {
       "Package": "dbplyr",
       "Version": "1.4.4",
@@ -418,6 +432,13 @@
       "Repository": "CRAN",
       "Hash": "af2c2531e55df5cf230c4b5444fc973c"
     },
+    "htmlwidgets": {
+      "Package": "htmlwidgets",
+      "Version": "1.5.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6fdaa86d0700f8b3e92ee3c445a5a10d"
+    },
     "httpuv": {
       "Package": "httpuv",
       "Version": "1.5.5",
@@ -473,6 +494,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "fbd9285028b0263d76d18c95ae51a53d"
+    },
+    "lazyeval": {
+      "Package": "lazyeval",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "d908914ae53b04d4c0c0fd72ecc35370"
     },
     "lifecycle": {
       "Package": "lifecycle",
