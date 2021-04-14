@@ -36,21 +36,25 @@ execute(connectionDetails = connectionDetails,
         databaseDescription = databaseDescription,
         createCohorts = FALSE,
         synthesizePositiveControls = FALSE,
-        runAnalyses = FALSE,
-        packageResults = FALSE,
+        runAnalyses = TRUE,
+        packageResults = TRUE,
         maxCores = maxCores)
 
-# resultsZipFile <- file.path(outputFolder, "export", paste0("Results_", databaseId, ".zip"))
-# dataFolder <- file.path(outputFolder, "shinyData")
-# 
-# # You can inspect the results if you want:
-# prepareForEvidenceExplorer(resultsZipFile = resultsZipFile, dataFolder = dataFolder)
-# launchEvidenceExplorer(dataFolder = dataFolder, blind = TRUE, launch.browser = FALSE)
-# 
+resultsZipFile <- file.path(outputFolder, "export", paste0("Results_", databaseId, ".zip"))
+dataFolder <- file.path(outputFolder, "shinyData")
+
+# You can inspect the results if you want:
+prepareForEvidenceExplorer(resultsZipFile = resultsZipFile, dataFolder = dataFolder)
+launchEvidenceExplorer(dataFolder = dataFolder, blind = FALSE, launch.browser = FALSE)
+
 # # Upload the results to the OHDSI SFTP server:
 # privateKeyFileName <- ""
 # userName <- ""
 # uploadResults(outputFolder, privateKeyFileName, userName)
+
+
+
+#### There be dragons below here
 
 # Run competing risk analyses
 library(dplyr)
